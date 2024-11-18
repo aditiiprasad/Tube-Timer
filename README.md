@@ -4,6 +4,9 @@ Tube-Timer is a simple web tool designed to calculate the total length of YouTub
 
 ---
 
+![Tube-Timer Screenshot](images/websiteSS.png)
+
+
 ## Features
 
 - **Copy Playlist URL**: Paste the URL of the YouTube playlist you want to analyze.
