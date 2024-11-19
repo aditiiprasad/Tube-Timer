@@ -39,7 +39,7 @@ function Body() {
         return;
       }
 
-      const response = await axios.get(`http://localhost:5000/api/playlist-length`, {
+      const response = await axios.get(`https://tube-timer-backend.onrender.com/api/playlist-length`, {
         params: { playlistId },
       });
 

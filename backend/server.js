@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
   res.send('Server is running');
 });
 
-// Endpoint to get playlist length
 app.get('/api/playlist-length', async (req, res) => {
   const { playlistId } = req.query;
 
@@ -27,7 +26,6 @@ app.get('/api/playlist-length', async (req, res) => {
 
   try {
     do {
-      // Fetch playlist items
       const response = await axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
         params: {
           part: 'contentDetails',
@@ -38,46 +36,35 @@ app.get('/api/playlist-length', async (req, res) => {
         },
       });
 
-      const videoIds = response.data.items.map(item => item.contentDetails.videoId).join(',');
+      const videoIds = response.data.items.map((item) => item.contentDetails.videoId);
+      const videoIdChunks = chunkArray(videoIds, 10);
 
-      // Split video IDs into chunks if necessary
-      const videoIdChunks = chunkArray(videoIds.split(','), 10);
-
-      for (const chunk of videoIdChunks) {
-        // Fetch video details
-        const videoResponse = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+      // Use Promise.all to make requests in parallel
+      const videoDetailsRequests = videoIdChunks.map((chunk) =>
+        axios.get('https://www.googleapis.com/youtube/v3/videos', {
           params: {
             part: 'contentDetails',
             id: chunk.join(','),
             key: YOUTUBE_API_KEY,
           },
-        });
+        })
+      );
 
-        // Calculate total duration
-        videoResponse.data.items.forEach(video => {
+      const videoDetailsResponses = await Promise.all(videoDetailsRequests);
+
+      videoDetailsResponses.forEach((videoResponse) => {
+        videoResponse.data.items.forEach((video) => {
           const duration = video.contentDetails.duration;
           totalDuration += parseISO8601Duration(duration);
         });
-      }
+      });
 
       nextPageToken = response.data.nextPageToken;
     } while (nextPageToken);
 
     res.json({ totalDuration });
   } catch (error) {
-    // Enhanced error handling and logging
-    console.error('Error occurred while fetching playlist data:', error.message);
-    if (error.response) {
-      console.error('Response data:', error.response.data);
-      console.error('Response status:', error.response.status);
-      console.error('Response headers:', error.response.headers);
-    } else if (error.request) {
-      // No response received
-      console.error('No response received:', error.request);
-    } else {
-      // Other errors
-      console.error('Error message:', error.message);
-    }
+    console.error('Error occurred:', error.message);
     res.status(500).json({ error: 'Failed to fetch playlist length' });
   }
 });

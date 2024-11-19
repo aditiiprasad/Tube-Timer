@@ -2,35 +2,43 @@
 
 Tube-Timer is a simple web tool designed to calculate the total length of YouTube playlists, with the option to view durations at different playback speeds.
 
----
-
-![Tube-Timer Screenshot](images/websiteSS.png)
-
-
-## Features
-
-- **Copy Playlist URL**: Paste the URL of the YouTube playlist you want to analyze.
-- **Calculate Total Length**: Instantly get the total duration of all videos in the playlist.
-- **Duration for Different Speeds**: View the adjusted playlist length for various playback speeds (e.g., 1.25x, 1.5x, 2x).
+<a href="https://tube-timer.netlify.app/"><img src="tube-timer/public/favicon.ico" height="100" />  </a> <b>Click this icon to view Project<b>
 
 ---
 
-## How to Use
 
-1. **Paste the Playlist URL**: Copy the YouTube playlist URL and paste it into the designated input box.
-2. **Click "Calculate Length"**: Press the button to compute the total playlist duration.
-3. **View Results**: The tool will display:
-   - Total length of the playlist.
-   - Adjusted durations for different playback speeds.
 
----
+## Responsive
+
+<video width="320" height="240" controls>
+  <source src="images/pcss.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video  width="320" height="240" controls>
+  <source src="images/modss.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
+
+
+
+
 
 ## Tech Stack
 
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: React , Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **APIs**: YouTube Data API
 
 ---
+
+## Features
+- Copy Playlist URL: Paste the URL of the YouTube playlist you want to analyze.
+
+- Calculate Total Length: Instantly get the total duration of all videos in the playlist.
+
+- Duration for Different Speeds: View the adjusted playlist length for various playback speeds (e.g., 1.25x, 1.5x, 2x).
 
 Enjoy using Tube-Timer to efficiently manage your YouTube playlists and optimize your viewing experience!
