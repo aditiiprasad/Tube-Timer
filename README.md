@@ -10,12 +10,12 @@ Tube-Timer is a simple web tool designed to calculate the total length of YouTub
 
 ## Responsive
 
-<video width="320" height="240" controls>
+<video  >
   <source src="images/pcss.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-<video  width="320" height="240" controls>
+<video  >
   <source src="images/modss.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
